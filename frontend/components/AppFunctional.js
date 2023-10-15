@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 
 // Suggested initial states
 const initialMessage = ''
@@ -6,9 +7,14 @@ const initialEmail = ''
 const initialSteps = 0
 const initialIndex = 4 // the index the "B" is at
 
+
+
 export default function AppFunctional(props) {
   // THE FOLLOWING HELPERS ARE JUST RECOMMENDATIONS.
   // You can delete them and build your own logic from scratch.
+const [steps,setSteps] = useState(initialSteps)
+const [email,setEmail] = useState(initialEmail)
+const [currentIndex,setCurrentIndex] = useState(initialIndex)
 
   function getXY() {
     // It it not necessary to have a state to track the coordinates.
@@ -22,6 +28,9 @@ export default function AppFunctional(props) {
   }
 
   function reset() {
+    setSteps(initialSteps)
+    setEmail(initialEmail)
+    setCurrentIndex(initialIndex)
     // Use this helper to reset all states to their initial values.
   }
 
@@ -67,7 +76,7 @@ export default function AppFunctional(props) {
         <button id="up">UP</button>
         <button id="right">RIGHT</button>
         <button id="down">DOWN</button>
-        <button id="reset">reset</button>
+        <button id="reset" onClick={reset}>reset</button>
       </div>
       <form>
         <input id="email" type="email" placeholder="type email"></input>
