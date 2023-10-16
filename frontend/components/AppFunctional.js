@@ -17,6 +17,10 @@ const [email,setEmail] = useState(initialEmail)
 const [currentIndex,setCurrentIndex] = useState(initialIndex)
 
   function getXY() {
+    const x = currentIndex % 3 + 1
+    const y = Math.floor(currentIndex / 3) + 1
+
+    return ` Coordinates (${x}, ${y})`
     // It it not necessary to have a state to track the coordinates.
     // It's enough to know what index the "B" is at, to be able to calculate them.
   }
@@ -56,7 +60,7 @@ const [currentIndex,setCurrentIndex] = useState(initialIndex)
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">Coordinates (2, 2)</h3>
+        <h3 id="coordinates">{getXY()}</h3>
         <h3 id="steps">You moved 0 times</h3>
       </div>
       <div id="grid">
