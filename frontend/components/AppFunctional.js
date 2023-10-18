@@ -49,7 +49,19 @@ const [currentIndex,setCurrentIndex] = useState(initialIndex)
   }
 
   function getNextIndex(direction) {
-    setSteps(steps + 1)    
+      
+      if(direction.target.id ==='left'){
+        setCurrentIndex(currentIndex - 1)
+        //how do i stop it from going past 0 and over 8???
+      } else if (direction.target.id === 'right'){
+        setCurrentIndex(currentIndex + 1)
+      }else if(direction.target.id === 'down'){
+        setCurrentIndex(currentIndex + 3)
+      }
+      else if (direction.target.id === 'up'){
+        setCurrentIndex(currentIndex - 3)
+      }
+    
     // This helper takes a direction ("left", "up", etc) and calculates what the next index
     // of the "B" would be. If the move is impossible because we are at the edge of the grid,
     // this helper should return the current index unchanged.
@@ -100,9 +112,9 @@ const [currentIndex,setCurrentIndex] = useState(initialIndex)
       </div>
       <div id="keypad">
         <button id="left" onClick={getNextIndex}>LEFT</button>
-        <button id="up" onClick={move}>UP</button>
+        <button id="up" onClick={getNextIndex}>UP</button>
         <button id="right" onClick={getNextIndex}>RIGHT</button>
-        <button id="down" onClick={move}>DOWN</button>
+        <button id="down" onClick={getNextIndex}>DOWN</button>
         <button id="reset" onClick={reset}>reset</button>
       </div>
       <form>
