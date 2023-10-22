@@ -34,7 +34,7 @@ const [initialMessage,setInitialMessage] = useState('')
   function getXYMessage() {
     const [x,y] = getXY()
 
-    return ` Coordinates (${x}, ${y})`
+    return `Coordinates (${x}, ${y})`
     // It it not necessary to have a state to track the "Coordinates (2, 2)" message for the user.
     // You can use the `getXY` helper above to obtain the coordinates, and then `getXYMessage`
     // returns the fully constructed string.
@@ -101,10 +101,10 @@ const [initialMessage,setInitialMessage] = useState('')
   }
 
   function onSubmit(evt) {
-    evt.preventDefault()
-    reset()
-    const [x,y] = getXY()
-    const URL = 'http://localhost:9000/api/result'
+    evt.preventDefault();
+    reset();
+    const [x,y] = getXY();
+    const URL = 'http://localhost:9000/api/result';
 
     axios.post(URL, {
       email: email,
@@ -118,7 +118,7 @@ const [initialMessage,setInitialMessage] = useState('')
     })
     .catch(err => {
       console.log(err)
-      setInitialMessage("Ouch: steps is required")
+      setInitialMessage("Ouch: email is required")
       
     })
     // Use a POST request to send a payload to the server.
@@ -156,3 +156,5 @@ const [initialMessage,setInitialMessage] = useState('')
     </div>
   )
 }
+
+
