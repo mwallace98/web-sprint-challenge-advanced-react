@@ -19,6 +19,8 @@ const [currentIndex,setCurrentIndex] = useState(4)
 const [initialMessage,setInitialMessage] = useState('')
 
 
+
+
   function getXY() {
     const x = (currentIndex % 3) + 1
     let y
@@ -41,10 +43,10 @@ const [initialMessage,setInitialMessage] = useState('')
   }
 
   function reset() {
-    setSteps(initialSteps)
-    setEmail(initialEmail)
-    setCurrentIndex(initialIndex)
-    setInitialMessage('')
+    setSteps(initialSteps);
+    setEmail(initialEmail);
+    setCurrentIndex(initialIndex);
+    setInitialMessage('');
     
     // Use this helper to reset all states to their initial values.
   }
@@ -102,7 +104,15 @@ const [initialMessage,setInitialMessage] = useState('')
 
   function onSubmit(evt) {
     evt.preventDefault();
-    reset();
+    
+    if(email === 'foo@bar.baz'){
+      setInitialMessage('foo@bar.baz failure #71')
+      return;
+    }
+    if(email === ''){
+      setInitialMessage('Ouch: email is required')
+    } 
+    
     const [x,y] = getXY();
     const URL = 'http://localhost:9000/api/result';
 
@@ -115,20 +125,26 @@ const [initialMessage,setInitialMessage] = useState('')
     .then(res => {
       console.log(res)
       setInitialMessage(res.data.message)
+      setEmail(initialEmail)
     })
     .catch(err => {
       console.log(err)
-      setInitialMessage("Ouch: email is required")
-      
+      if(email === ''){
+        setInitialMessage('Ouch: email is required')
+      } else{
+      setInitialMessage('Ouch: email must be a valid email')
+      }
     })
     // Use a POST request to send a payload to the server.
   }
 
+    const [x,y] = getXY();
+    const coordinates = `Coordinates (${x}, ${y})`;
   return (
     <div id="wrapper" className={props.className}>
       <div className="info">
-        <h3 id="coordinates">{getXYMessage()}</h3>
-        <h3 id="steps">You moved {steps} times</h3>
+        <h3 id="coordinates">{coordinates}</h3>
+        <h3 id="steps">You moved {steps} time{steps === 1 ? '' : 's'}</h3>
       </div>
       <div id="grid">
         {
@@ -149,9 +165,9 @@ const [initialMessage,setInitialMessage] = useState('')
         <button id="down" onClick={move}>DOWN</button>
         <button id="reset" onClick={reset}>reset</button>
       </div>
-      <form>
+      <form onSubmit={onSubmit}>
         <input id="email" type="email" placeholder="type email" value ={email} onChange={onChange}></input>
-        <input id="submit" type="submit" onClick={onSubmit}  ></input>
+        <input id="submit" type="submit"   ></input>
       </form>
     </div>
   )
