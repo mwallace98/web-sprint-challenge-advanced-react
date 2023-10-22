@@ -6,9 +6,9 @@ test('sanity', () => {
   expect(true).toBe(false)
 })
 
-// test('renders without error', () => {
-//   render (<AppFunctional />)
-// })
+test('renders without error', () => {
+  render (<AppFunctional />)
+})
 
 
 
